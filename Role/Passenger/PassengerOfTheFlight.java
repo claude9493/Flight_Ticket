@@ -1,6 +1,7 @@
 package Passenger;
 
 import java.util.ArrayList;
+import Admin.Admin_individual;
 
 public class PassengerOfTheFlight {
 	int MaxPassenger;
@@ -8,7 +9,7 @@ public class PassengerOfTheFlight {
 	int CurrentNumber = List.size();
 	
 //	Add a passenger to flight
-	public void Add(PassengerOfTheFlight PLF, Passenger_ind newguy){
+	public void Add(PassengerOfTheFlight PLF, Passenger_ind newguy, Admin_individual ad){
 		if (CurrentNumber < MaxPassenger){
 			PLF.List.add(newguy);
 			System.out.println("Successfully add new passenger!!!");

@@ -1,6 +1,6 @@
 package Admin;
 
-class Admin_individual {
+public class Admin_individual {
 	public String userName;
 	public String password;
 	public enum Status_List{ONLINE, OFFLINE};

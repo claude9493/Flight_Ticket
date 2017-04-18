@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import Admin.Admin_individual.Status_List;
 
-class Admins {
+public class Admins {
 
 	final int MAXADMINS = 20;
 	Admin_individual[] List_Admin = new Admin_individual[MAXADMINS + 1];
