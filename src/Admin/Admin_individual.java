@@ -9,6 +9,7 @@ public class Admin_individual {
 	public Admin_individual(String name, String password){
 		this.userName = name;
 		this.password = password;
+		this.status = Status_List.OFFLINE;
 	}
 	
 

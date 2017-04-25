@@ -1,14 +1,13 @@
 package Admin;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JPanel;
-
-public class UI_Admin {
+import javafx.application.Application;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+public class UI_Admin extends Application {
 
 	public static void main(String[] args) {
-		JFrame AdminUI = new JFrame("Admin");
+/*		JFrame AdminUI = new JFrame("Admin");
 		AdminUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		AdminUI.setSize(200, 400);
 		AdminUI.setVisible(true);
@@ -24,15 +23,22 @@ public class UI_Admin {
 		BAR.add(Log);
 		BAR.add(Register);
 		AdminUI.setJMenuBar(BAR);
-		
+*/	
+		LOG();
 	}
 	
-	public void LOG(){
-		JFrame log = new JFrame("Log");
-		log.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		log.setVisible(true);
+	public static void LOG(){
 		
 		
+		
+		
+		
+		
+	}
+
+	@Override
+	public void start(Stage arg0) throws Exception {
+		// TODO Auto-generated method stub
 		
 	}
 
