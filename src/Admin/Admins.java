@@ -1,5 +1,13 @@
 package Admin;
-
+/**
+ * Admins class [Unfinished]
+ * List_Admin存储Admins, 每次启动时，用 Admins_read 从文档中读取Admins的数据，提取到List_Admin里面
+ * Admins_init初始化文档，提供几个 Admins 的实例 [staging] [finished]
+ * Admins_show 展示文档中所有Admins，Name  Status [staging][finished]
+ * check 检查 某 Admin 是否在List_Admin里面，若在返回其index，若不在返回-1 [finished]
+ * Log and Register methods are [finished]
+ * 
+ */
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
@@ -9,7 +17,7 @@ import Admin.Admin_individual.Status_List;
 
 public class Admins {
 
-	static ArrayList<Admin_individual> List_Admin = new ArrayList<Admin_individual>();
+	ArrayList<Admin_individual> List_Admin = new ArrayList<Admin_individual>();
 	int List_Length;
 
 /*
@@ -78,8 +86,9 @@ public class Admins {
 */	
 //	+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	
+	
 //	Read Admins information from the list
-	public static void Admins_read() throws FileNotFoundException{
+	public void Admins_read() throws FileNotFoundException{
 		Scanner input = new Scanner(new File("Admins.txt"));
 		while(input.hasNext()){
 			String name = input.next();
@@ -98,7 +107,7 @@ public class Admins {
 	}
 
 //	Show all of the admins
-	public static void Admins_show() throws FileNotFoundException{
+	public void Admins_show() throws FileNotFoundException{
 		Scanner read = new Scanner(new File("Admins.txt"));
 		while(read.hasNext()){
 			String Name = read.next();
@@ -110,10 +119,11 @@ public class Admins {
 	}
 	
 //check whether some one is in the list
-	public static int check(String name){
+	public int check(String name){
 		int count = 0;
 		for(Admin_individual anyone : List_Admin){
-			if(anyone.userName == name)
+			if(anyone.userName.equals(name))
+//				String is reference which cannot be compared straightly, here we use equals method
 				return count;
 		}
 		count++;
@@ -121,50 +131,57 @@ public class Admins {
 	}
 	
 //	Log
-	public static void LOG(){
+	public void LOG()
+	{
 		Scanner input = new Scanner(System.in);
 		System.out.println("+++++++++++++++++++++++++++++++++++++++");
 		System.out.print("Admin name:\t");
 		String name = input.next();
 		System.out.print("\nPassword:\t");
 		String password = input.next();
-		if (check(name) != -1){
+		if (check(name) != -1)
+		{
 			int index = check(name);
-			if(List_Admin.get(index).password == password)
+			if(List_Admin.get(index).password.equals(password))
 				System.out.println("Successfully Log In!");
 		}
-		else{
+		else
+		{
 			System.out.println("Name or Password may be wrong!");
 		}
 		
 	}
 	
-	
-	public static void register(){
+//	Register
+	public void register(){
 		Scanner input = new Scanner(System.in);
 		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++");
 		System.out.print("Name:\t");
 		String name = input.next();
 		System.out.print("\nPassword:\t");
 		String password = input.next();
+		if(check(name)!=-1)
+			System.out.println("Such admin already exists in system.");
+		Admin_individual newAdmin = new Admin_individual(name, password);
+		List_Admin.add(newAdmin);
+		input.close();
+	}
+//	super inquire for admins
+	public void inquire(){
 		
+	}
+//	manage function for admins: manage order and flight and admins list
+	public void manage(){
 		
+	}
+//	write data to the .txt file
+	public void write(){
 		
 	}
 	
-	public static void inquire(){
-		
-	}
 	
-	public static void manage(){
-		
-	}
-	
-	public static void write(){
-		
-	}
 //	main function used to test
-	public static void main(String[] a) throws FileNotFoundException{
+	public void main(String[] a) throws FileNotFoundException{
 		Admins_show();
 		Admins_read();
 		for(Admin_individual someone : List_Admin){

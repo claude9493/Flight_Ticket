@@ -1,4 +1,12 @@
 package Application;
+/**
+ * Entry of the whole program.
+ * Main method is used to start the program and initialize necessary data
+ * UI method provide user interface for different behavior
+ * Admin method provide sub_interface for admins'behavior
+ * Passenger method provide sub_interface for passenger's behavior
+ * 
+ */
 
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -13,7 +21,6 @@ public class Main_interface {
 		// TODO Auto-generated method stub
 		Admin.Admins.Admins_init();
 		System.out.println("Admins inilize successfully!");
-		Admin.Admins.Admins_show();
 		UI();
 
 	}
@@ -22,6 +29,7 @@ public class Main_interface {
 		System.out.println();
 		System.out.println("1.  Admin");
 		System.out.println("2.  Passeager");
+		System.out.println("3.  Inquiry");
 		int n = input.nextInt();
 
 		switch (n) {

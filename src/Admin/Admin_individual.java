@@ -1,5 +1,8 @@
 package Admin;
-
+/***
+ * Admin_induvidual class 
+ * @author Claude
+ */
 public class Admin_individual {
 	public String userName;
 	public String password;
