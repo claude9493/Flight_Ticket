@@ -64,12 +64,12 @@ public class CityList {
 //	List all available cities
 	public void all_city()
 	{
-		System.out.println("All cities that you can choose.");
+		System.out.println("All cities:");
 		for(City s : city_list)
 		{
 			System.out.printf("%s    ", s.name);
 		}
-		System.out.println("");
+		System.out.println();
 		
 	}
 

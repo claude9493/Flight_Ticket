@@ -11,5 +11,10 @@ public class Order {
 	public Date createDate;
 	public enum StatusList{UNPAID,PAID,CANCEL};
 	public StatusList status;
+	
+	public void makeorder(int ID)
+	{
+		
+	}
 
 }
