@@ -168,7 +168,15 @@ public class Admins {
 	}
 //	super inquire for admins
 	public void inquire(){
-		
+		Scanner input = new Scanner(System.in);
+		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.printf("1.Inquire Flight\n2.Inquire Order\n3.Inquire Passenger");
+		int choose = input.nextInt();
+		switch(choose){
+		case 1:
+		case 2:
+		case 3:
+		}
 	}
 //	manage function for admins: manage order and flight and admins list
 	public void manage(){
@@ -182,11 +190,13 @@ public class Admins {
 	
 //	main function used to test
 	public void main(String[] a) throws FileNotFoundException{
+		Admins test = new Admins();
 		Admins_show();
 		Admins_read();
 		for(Admin_individual someone : List_Admin){
 			System.out.println(someone.userName+"\t"+someone.password+"\t"+someone.status);
 		}
+		test.LOG();
 		
 	}
 
