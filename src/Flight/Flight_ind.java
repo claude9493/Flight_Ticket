@@ -1,5 +1,7 @@
 package Flight;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Formatter;
 
 /**
@@ -17,7 +19,7 @@ public class Flight_ind {
 
 	public String FlightID, startTime, arrivalTime, departureDate;
 	public int price, currentPassengers, seatCapacity;
-	
+
 	public enum FlightStatus {
 		UNPUBLISHED, AVAILABLE, FULL, TERMINATE
 	};
@@ -27,14 +29,16 @@ public class Flight_ind {
 	public PassengerOfTheFlight PLOF;
 	public CityList list = new CityList();
 
-	public void Flight_set() 
-	{
+	public void Flight_set() {
 		System.out.println();
 		Scanner input = new Scanner(System.in);
-		System.out.println("FlightID\t	StartTime\t		ArrivalTime\t	departureDate\t		price\n");//output information
-		String FlightID = input.next(), StartTime = input.next(), ArrivalTime = input.next();//ID, StartTime, ArrivalTime
-		String departureDate = input.next();//departureDate
-		int price = input.nextInt();//price
+		System.out.println("FlightID\t	StartTime\t		ArrivalTime\t	departureDate\t		price\n");// output
+																										// information
+		String FlightID = input.next(), StartTime = input.next(), ArrivalTime = input.next();// ID,
+																								// StartTime,
+																								// ArrivalTime
+		String departureDate = input.next();// departureDate
+		int price = input.nextInt();// price
 		this.FlightID = FlightID;
 		this.startTime = StartTime;
 		this.arrivalTime = ArrivalTime;
@@ -51,11 +55,12 @@ public class Flight_ind {
 		this.arrivalCity = list.city_list.get(list.index_of(ArrivalCity));
 		this.status = FlightStatus.UNPUBLISHED;
 	}
-	
-	public void write() throws Exception
-	{
-		Formatter output = new Formatter("Flights.txt");
-		output.format("%s\t",this.FlightID );
-	}
 
+	public void print() {
+		System.out.println();
+		System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\t%d\t%d\t%d\t", this.FlightID, this.startCity.name,
+				this.arrivalCity.name, this.departureDate, this.startTime, this.arrivalTime, this.price,
+				this.seatCapacity, this.currentPassengers);
+
+	}
 }
