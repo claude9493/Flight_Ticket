@@ -1,2 +1,5 @@
 admins
 claude
+shen
+zheng
+hao

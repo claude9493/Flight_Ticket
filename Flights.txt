@@ -1,1 +1,5 @@
-S0001	Shenzhen	Beijing		2017-5-4	9:00	14:00	100	100	0	B0001	Beijing		Shenzhen	2017-5-4	16:00	20:00	100	100	0
+BA0001	Shenzhen	Beijing		2017-5-4	9:00	14:00	100	100	0	
+SD0001	Beijing	Shenzhen	2017-5-4	16:00	20:00	100	100	0
+SD0002	Beijing	Shanghai	2017-5-5	18:00	19:00	120	120	0
+
+
