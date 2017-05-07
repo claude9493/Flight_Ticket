@@ -10,10 +10,11 @@ import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Scanner;
 
+import City.CityList;
 import Flight.Flight_ind.FlightStatus;
 
 public class Flights {
-	ArrayList<Flight_ind> FlightList = new ArrayList<Flight_ind>();
+	public ArrayList<Flight_ind> FlightList = new ArrayList<Flight_ind>();
 
 	// Add a new flight
 	public void AddFlight() throws Exception {
@@ -36,24 +37,25 @@ public class Flights {
 
 	// Read the file and add the flights information into the list
 	public void read() throws Exception {
-		Scanner input = new Scanner(new File("Flights.txt"));
-		Flight_ind newFlight = new Flight_ind();
-		newFlight.list.read();
-		while (input.hasNext()) {
-			newFlight.FlightID = input.next();
-			newFlight.startCity = newFlight.list.city_list.get(newFlight.list.index_of(input.next()));
-			newFlight.arrivalCity = newFlight.list.city_list.get(newFlight.list.index_of(input.next()));
-			newFlight.departureDate = input.next();
-			newFlight.startTime = input.next();
-			newFlight.arrivalTime = input.next();
-			newFlight.price = input.nextInt();
-			newFlight.seatCapacity = input.nextInt();
-			newFlight.currentPassengers = input.nextInt();
-			newFlight.status = FlightStatus.UNPUBLISHED;
-			System.out.printf("%s is added\n", newFlight.FlightID);
+		Scanner input50 = new Scanner(new File("Flights.txt"));
+		CityList cl = new CityList();
+		cl.read();
+		while (input50.hasNext()) {
+			Flight_ind newFlight = new Flight_ind();
+			newFlight.list = cl;
+			newFlight.FlightID = input50.next();
+			newFlight.startCity = newFlight.list.city_list.get(newFlight.list.index_of(input50.next()));
+			newFlight.arrivalCity = newFlight.list.city_list.get(newFlight.list.index_of(input50.next()));
+			newFlight.departureDate = input50.next();
+			newFlight.startTime = input50.next();
+			newFlight.arrivalTime = input50.next();
+			newFlight.price = input50.nextInt();
+			newFlight.seatCapacity = input50.nextInt();
+			newFlight.currentPassengers = input50.nextInt();
+			newFlight.status = FlightStatus.AVAILABLE;
+//			System.out.printf("%s is added\n", newFlight.FlightID);
 			FlightList.add(newFlight);
 		}
-		input.close();
 	}
 
 	/*
@@ -77,11 +79,20 @@ public class Flights {
 	public void all_flights() {
 		System.out.println();
 		System.out.println(
-				"FlightID\tstartCity\tarrivalCity\tdepartureDate\tstartTime\tarrivalTime\tprice\tseatCapacity\tcurrentPassengers\t");
+				"FlightID  startCity  arrivalCity  departureDate  startTime  arrivalTime  price  seatCapacity  currentPassengers\t");
 		for (int i = 0; i < FlightList.size(); i++) {
-			System.out.println(i);
+//			System.out.println(i);
 			FlightList.get(i).print();
 		}
+	}
+	
+	//Check whether a FlightID has a corresponding Flight
+	public int check(String ID){
+		for(Flight_ind f : FlightList){
+			if(f.FlightID.equals(ID))
+				return FlightList.indexOf(f);
+		}
+		return -1;
 	}
 
 	// main method used to testing the code while coding
