@@ -1,4 +1,11 @@
 package Passenger;
+/**
+ * I decided to give up this class
+ * So how to inquire all passengers of a Flight?
+ * We can check each passenger's myOrder!!!
+ * 
+ */
+
 
 import java.util.ArrayList;
 import Admin.Admin_individual;

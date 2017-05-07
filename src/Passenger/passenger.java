@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Scanner;
 
+import Flight.Flights;
+
 public class passenger {
 
 	public final int MAXLEN = 100;
@@ -16,37 +18,38 @@ public class passenger {
 
 	// Register and store the information of the new passenger to the file
 	public void register() throws Exception {
-		Scanner input = new Scanner(System.in);
+		Scanner input71 = new Scanner(System.in);
 		Passenger_ind new_passenger = new Passenger_ind();
 		System.out.println("REGISTER");
-		System.out.print("UserName:\t");
-		new_passenger.identityID = input.nextLine().trim();
+		System.out.print("Identity ID:\t");
+		new_passenger.identityID = input71.nextLine().trim();
 		System.out.print("\nPassword:\t");
-		new_passenger.set_password(input.nextLine().trim());
+		new_passenger.set_password(input71.nextLine().trim());
+		new_passenger.passagerID = PassengerList.size();
 		PassengerList.add(new_passenger);
 		write(new_passenger);
-		input.close();
 		System.out.println("\nCongratulations, you have successfully registered.");
 	}
 
 	// LOG
-	public void log() {
-		Scanner input = new Scanner(System.in);
+	public Passenger_ind log() {
+		Scanner input72 = new Scanner(System.in);
 		System.out.print("Your identityID:\t");
-		String ID = input.nextLine().trim();
-		System.out.print("\nPassword:\t");
-		String password = input.nextLine().trim();
-		input.close();
-		if (check(ID) == -1)
+		String ID = input72.nextLine().trim();
+		System.out.print("Password:\t");
+		String password = input72.nextLine().trim();
+		// input.close();
+		if (check(ID) == -1) {
 			System.out.println("\nSuch passenger doesn't exist in system.");
-		else if (!PassengerList.get(check(ID)).equals(password))
-				System.out.println("Wrong password, please try again.\n");
-		else{
+			return (new Passenger_ind(-1));
+		} else if (!PassengerList.get(check(ID)).get_password().equals(password)) {
+			System.out.println("Wrong password, please try again.\n");
+			return (new Passenger_ind(-1));
+		} else {
 			PassengerList.get(check(ID)).change_status();
 			System.out.println("\nCongratulations, you have successfully loged in.");
+			return (PassengerList.get(check(ID)));
 		}
-		
-
 	}
 
 	// Delete a passenger from the list and the file
@@ -58,9 +61,9 @@ public class passenger {
 		}
 	}
 
-	public int check(String name) {
+	public int check(String ID) {
 		for (Passenger_ind p : PassengerList) {
-			if (p.identityID.equals(name))
+			if (p.identityID.equals(ID))
 				return PassengerList.indexOf(p);
 		}
 		return -1;
@@ -68,16 +71,40 @@ public class passenger {
 
 	// read the passengers'information from the file
 	public void read() throws Exception {
-		Scanner input = new Scanner(new File("Passengers.txt"));
-		Passenger_ind np = new Passenger_ind();
-		while (input.hasNext()) {
-			np.passagerID = input.nextInt();
-			np.identityID = input.next();
-			np.set_password(input.next());
-			np.realName = input.next();
+		Scanner input73 = new Scanner(new File("Passengers.txt"));
+		while (input73.hasNext()) {
+			Passenger_ind np = new Passenger_ind();
+			np.passagerID = input73.nextInt();
+			np.identityID = input73.next();
+			np.set_password(input73.next());
+			np.realName = input73.next();
 			PassengerList.add(np);
 		}
-		input.close();
+	}
+
+	// Inquire method for passengers
+	public void inquire(Flights f) {
+		System.out.println();
+		System.out.printf(
+				"Inquire\n1.List all of the flights\t2.Inquire by FlightID\n3.Inquire by cities\t4.Inquire by date\n0.Exit\n");
+		Scanner input74 = new Scanner(System.in);
+		while (true) {
+			int choose = input74.nextInt();
+			if(choose == 0)
+				break;
+			switch (choose) {
+			case 1:
+				f.all_flights();
+				break;
+			case 2:
+				break;
+			case 3:
+				break;
+			case 4:
+				break;
+
+			}
+		}
 	}
 
 	// write information to the file
