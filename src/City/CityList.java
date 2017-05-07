@@ -11,16 +11,15 @@ public class CityList {
 //	Add a new city to the list and the file
 	public void add_city() throws Exception
 	{
-		Scanner input = new Scanner(System.in);
+		Scanner input30 = new Scanner(System.in);
 		System.out.println("==============================");
 		System.out.print("City Name:\t");
-		String name = input.next();
+		String name = input30.next();
 		System.out.print("\nCity ID:\t");
-		int ID = input.nextInt();
+		int ID = input30.nextInt();
 		City new_city = new City(ID, name);
 		city_list.add(new_city);
 		write(new_city);
-		input.close();
 	}
 	
 //	Write cities'information to the file
@@ -36,17 +35,16 @@ public class CityList {
 //	Read the file and put the informations in the city_list
 	public void read() throws Exception
 	{
-		Scanner input = new Scanner(new File("City.txt"));
+		Scanner input31 = new Scanner(new File("City.txt"));
 		int ID;
 		String name;
-		while ( input.hasNext() )
+		while ( input31.hasNext() )
 		{
-			ID = input.nextInt();
-			name = input.next();
+			ID = input31.nextInt();
+			name = input31.next();
 			City now_city = new City(ID, name);
 			city_list.add(now_city);
 		}
-		input.close();
 	}
 	
 //	Get the index of the city while the city'sname is giver

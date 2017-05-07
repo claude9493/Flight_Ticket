@@ -8,6 +8,7 @@ package Application;
 
 import java.util.Scanner;
 
+import Admin.Admins;
 import Flight.Flights;
 import Passenger.passenger;
 
@@ -25,6 +26,7 @@ public class Main_interface {
 
 		passenger p = new passenger();
 		Flights f = new Flights();
+		Admins a = new Admins();
 
 		try {
 			p.read();
@@ -33,8 +35,8 @@ public class Main_interface {
 
 		}
 		System.out.println("Admins inilize successfully!");
-		UI.UI(p,f);
+		UI.U_I(p,f,a);
 
 	}
 
-}
+}	
