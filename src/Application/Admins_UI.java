@@ -1,5 +1,10 @@
 package Application;
-
+/**
+ * Before writing please concern: 
+ * 		Flights.statuscheck();
+ * 		
+ * 
+ */
 import java.util.Scanner;
 
 public class Admins_UI {

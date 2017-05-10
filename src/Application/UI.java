@@ -8,7 +8,7 @@ import Passenger.passenger;
 
 public class UI {
 //	public static Scanner inpu = new Scanner(System.in);
-	public static void U_I(passenger p,Flights f,Admins a) {
+	public static void U_I(passenger p,Flights f,Admins a) throws Exception {
 		Scanner input00 = new Scanner(System.in);
 		while (true) {
 			System.out.println();
@@ -29,7 +29,9 @@ public class UI {
 					break;
 				};
 				break;
-			case 3: f.inquiry();
+			case 3: 
+				f.statuscheck();
+				f.inquire_t();
 			}
 			 
 		}

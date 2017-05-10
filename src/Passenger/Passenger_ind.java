@@ -81,13 +81,13 @@ public class Passenger_ind {
 				}
 
 			} else if (!ans1.equals(this.get_password()))
-				System.out.println("Please check your password.");
+				System.out.println("Please check your password.\n");
 		} else if (index == -1
 				|| (index != -1 && (All_flights.FlightList.get(index).get_status() == FlightStatus.UNPUBLISHED
 						|| All_flights.FlightList.get(index).get_status() == FlightStatus.TERMINATE)))
-			System.out.println("Such flight doesn't exist.");
+			System.out.println("Such flight doesn't exist.\n");
 		else if (index != -1 && All_flights.FlightList.get(index).get_status() == FlightStatus.FULL)
-			System.out.println("Sorry, this flight is full.");
+			System.out.println("Sorry, this flight is full.\n");
 	}
 
 	// Un_subscribe Flights
@@ -96,8 +96,7 @@ public class Passenger_ind {
 		System.out.println("Cancel order.");
 		System.out.println("All of your orders are showed below:");
 		for (Order o : this.myorder)
-			System.out.printf("%d   %s   from %s to %s on %s   seat%d   %s\n", o.OrderID, o.flight.FlightID,
-					o.flight.startCity.name, o.flight.arrivalCity.name, o.flight.departureDate, o.seat, o.status);
+			o.Oprint();
 		if (this.myorder.size() == 0) {
 			System.out.println("You have no order yet.\n");
 			return;
@@ -108,7 +107,7 @@ public class Passenger_ind {
 		if (check_order(ID)) {
 
 			if (this.myorder.get(ID - 1).flight.get_status() == FlightStatus.TERMINATE)
-				System.out.println("Sorry, this flight has flown, you cannot cancel it now.");
+				System.out.println("Sorry, this flight has flown, you cannot cancel it now.\n");
 			else {
 				this.myorder.get(ID - 1).flight.currentPassengers--;
 				this.myorder.get(ID - 1).flight.set_status(FlightStatus.AVAILABLE);
@@ -117,7 +116,7 @@ public class Passenger_ind {
 				System.out.println("Refund is successfully returned.\n");
 			}
 		} else
-			System.out.println("Please check your input, such order doesn't exist.");
+			System.out.println("Please check your input, such order doesn't exist.\n");
 	}
 
 	public boolean check_order(int ID) {
@@ -132,21 +131,30 @@ public class Passenger_ind {
 	public void set_profile() {
 		Scanner input62 = new Scanner(System.in);
 		System.out.println("\nEdit Profile\n");
-		System.out.printf("Your current profile:\nidentityID: %s   realName: %s\n",this.identityID,this.realName);
+		System.out.printf("Your current profile:\nidentityID: %s   realName: %s\n", this.identityID, this.realName);
 		while (true) {
 			System.out.printf("1.identityID\t2.Password\n3.realName\t0.Exit\n");
-			int choose = input62.nextInt();
-			if (choose == 0)
+			int choose62 = input62.nextInt();
+			if (choose62 == 0) {
 				break;
-			switch (choose) {
+			}
+			switch (choose62) {
 			case 1:
-				this.identityID = input62.nextLine();
+				System.out.print("NewID:  ");
+				this.identityID = input62.next();
 				break;
 			case 2:
-				this.set_password(input62.nextLine());
+				System.out.println("Please input your current password to confirm your role:  ");
+				String currentPassword = input62.next().trim();
+				if (currentPassword.equals(this.get_password())) {
+					System.out.print("NewPassword:  ");
+					this.set_password(input62.next());
+				} else
+					System.out.println("Password Is Wrong, Please Check Your Input.");
 				break;
 			case 3:
-				this.realName = input62.nextLine();
+				System.out.print("NewName:  ");
+				this.realName = input62.next();
 				break;
 			}
 		}

@@ -18,7 +18,7 @@ public class Passenger_UI {
 		Scanner input10 = new Scanner(System.in);
 		while (true) {
 			System.out.printf(
-					"1.LOG\n2.REGISTER\n3.INQUIRE\n0.EXIT\n(Input the serial number to execute the corresponding operation)\n");
+					"1.LOG\n2.REGISTER\n0.EXIT\n(Input the serial number to execute the corresponding operation)\n");
 			int choose = input10.nextInt();
 			System.out.println();
 			if (choose == 0)
@@ -29,13 +29,16 @@ public class Passenger_UI {
 				if (me.passagerID == -1)
 					break;
 //				System.out.println(me.passagerID + " " + me.identityID);
+				System.out.println("=====================================================================");
 				After_Log(me, f, who1);
 				break;
 			}
 			case 2:
 				who1.register();
+				System.out.println("=====================================================================");
 				break;
-			case 3:who1.inquire(f);
+			default:
+				System.out.println("Check your input.");
 				break;
 			}
 		}
@@ -52,23 +55,28 @@ public class Passenger_UI {
 				return;
 			switch (choose2) {
 			case 1:
-				me.reserve(FList);
+				f.statuscheck();
+				me.reserve(f);
 				break;
-			case 2:who2.inquire(f);
+			case 2:
+				f.statuscheck();
+				f.inquire_p();
+//				who2.inquire_p(f);
 				break;
 			case 3:
+				f.statuscheck();
 				me.unsubscribe();
 				break;
 			case 4:
 				System.out.println("All your orders:");
 				for (Order o : me.myorder)
 					if (o.status != StatusList.CANCEL)
-						System.out.printf("%-6d-6%sfrom %s to %s on %-6sseat%-6d%-6s\n", o.OrderID, o.flight.FlightID,
-								o.flight.startCity.name, o.flight.arrivalCity.name, o.flight.departureDate,o.seat,o.status);
+						o.Oprint();
 				System.out.println();
 				break;
 			case 5:
 				me.set_profile();
+//				who2.re_write();
 				break;
 				
 			}

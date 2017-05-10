@@ -15,7 +15,7 @@ import Passenger.passenger;
 public class Main_interface {
 	public static Scanner input = new Scanner(System.in);
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		try {
 			Admin.Admins.Admins_init();

@@ -5,7 +5,7 @@ package Admin;
  */
 public class Admin_individual {
 	public String userName;
-	public String password;
+	private String password;
 	public enum Status_List{ONLINE, OFFLINE};
 	public Status_List status;
 	
@@ -15,16 +15,16 @@ public class Admin_individual {
 		this.status = Status_List.OFFLINE;
 	}
 	
-
-	public void Admin_inquiry(int Flight_ID){
-		
+	public String get_password(){
+		return this.password;
 	}
-	public void Admin_inquiry(String city){
-		
+	
+	public void set_password(String np){
+		this.password = np;
 	}
+	
 	public void createFlight(){
 		
 	}
 	
-
 }
