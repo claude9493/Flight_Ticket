@@ -1,0 +1,7 @@
+001	Shenzhen
+002	Beijing
+003	Shanghai
+004	NewYork
+005	Tokyo
+006	Chicago
+007	Guangzhou

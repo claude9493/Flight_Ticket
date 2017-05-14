@@ -29,7 +29,6 @@ public class CityList {
 		String name = newcity.name;
 		Formatter output = new Formatter("City.txt");
 		output.format("%d\t%s\n", id, name);
-		output.close();
 	}
 	
 //	Read the file and put the informations in the city_list

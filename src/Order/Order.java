@@ -14,7 +14,6 @@ public class Order {
 	public Date createDate;
 	public enum StatusList{UNPAID,PAID,CANCEL};
 	public StatusList status;
-	
 	public SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 	
 	public Order(Flight_ind f, Passenger_ind p)
@@ -24,8 +23,8 @@ public class Order {
 		this.status = StatusList.UNPAID;
 	}
 	public void Oprint(){
-		System.out.printf("%-6d%sfrom %s to %s on %-6sseat%-6d%-6s\n", OrderID, flight.FlightID,
-								flight.startCity.name, flight.arrivalCity.name, df.format(flight.date),seat,status);
+		System.out.printf("%-6d%-7sfrom %s to %s on %-6s   seat%-4d %-6s  created on %s \n", OrderID, flight.FlightID,
+								flight.startCity.name, flight.arrivalCity.name, df.format(flight.date),seat,status, df.format(createDate));
 	}
 
 }

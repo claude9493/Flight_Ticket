@@ -1,10 +1,11 @@
 package Passenger;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
-import Flight.Flights;
 import Flight.Flight_ind.FlightStatus;
+import Flight.Flights;
 import Order.Order;
 import Order.Order.StatusList;
 
@@ -47,14 +48,16 @@ public class Passenger_ind {
 	// ReserveFlight
 	public void reserve(Flights All_flights) {
 		System.out.println();
-		System.out.print("Reserve flight\nEnter the FlightID:\t");
+		System.out.print("Reserve flight\nEnter the departure date:  ");
 		Scanner input60 = new Scanner(System.in);
-		String ID = input60.nextLine().trim();
-		int index = All_flights.check(ID);
+		String idate = input60.next();
+		System.out.println("Enter the FlightID:  ");
+		String ID = input60.next().trim();
+		int index = All_flights.check(ID, idate);
 		if (index != -1 && All_flights.FlightList.get(index).get_status() == FlightStatus.AVAILABLE) {
 			All_flights.FlightList.get(index).print();
 			System.out.print("\nEnter your password to confirm your role\t");
-			String ans1 = input60.nextLine();
+			String ans1 = input60.next().trim();
 			if (ans1.equals(this.get_password())) {
 				All_flights.FlightList.get(index).currentPassengers++;
 				Order newOrder = new Order(All_flights.FlightList.get(index), this);
@@ -62,14 +65,16 @@ public class Passenger_ind {
 				// newOrder.flight.FlightID);
 				this.myorder.add(newOrder);
 				newOrder.OrderID = this.myorder.size();
+				newOrder.createDate = new Date();
 				System.out.print("\nHave you paid? Y/N\t");
-				String ans2 = input60.nextLine().trim();
+
+				String ans2 = input60.next().trim();
 				while (ans2.equals("Y") == false || ans2.equals("N") == false) {
 					if (ans2.equals("Y")) {
 						newOrder.status = StatusList.PAID;
 						newOrder.seat = All_flights.FlightList.get(index).currentPassengers;
 						System.out.printf(
-								"Your order is successfully created.\n Your OrderID is: %d\nYour seat is %d.\n\n",
+								"Your order is successfully created.\nYour OrderID is: %d\nYour seat is %d.\n\n",
 								newOrder.OrderID, newOrder.seat);
 						break;
 					} else if (ans2.equals("N")) {
@@ -77,7 +82,6 @@ public class Passenger_ind {
 						break;
 					} else
 						System.out.println("Please check your input.");
-					ans2 = input60.nextLine();
 				}
 
 			} else if (!ans1.equals(this.get_password()))
@@ -94,9 +98,9 @@ public class Passenger_ind {
 	public void unsubscribe() {
 		System.out.println();
 		System.out.println("Cancel order.");
-		System.out.println("All of your orders are showed below:");
-		for (Order o : this.myorder)
-			o.Oprint();
+		// System.out.println("All of your orders are showed below:");
+		// for (Order o : this.myorder)
+		// o.Oprint();
 		if (this.myorder.size() == 0) {
 			System.out.println("You have no order yet.\n");
 			return;
@@ -140,8 +144,14 @@ public class Passenger_ind {
 			}
 			switch (choose62) {
 			case 1:
-				System.out.print("NewID:  ");
-				this.identityID = input62.next();
+				System.out.println("Please input your current password to confirm your role:  ");
+				String cpw = input62.next().trim();
+				if (cpw.equals(this.get_password())) {
+					System.out.print("NewID:  ");
+					this.identityID = input62.next();
+				} else {
+					System.out.println("Password Is Wrong, Please Check Your Input.");
+				}
 				break;
 			case 2:
 				System.out.println("Please input your current password to confirm your role:  ");
@@ -149,8 +159,9 @@ public class Passenger_ind {
 				if (currentPassword.equals(this.get_password())) {
 					System.out.print("NewPassword:  ");
 					this.set_password(input62.next());
-				} else
+				} else {
 					System.out.println("Password Is Wrong, Please Check Your Input.");
+				}
 				break;
 			case 3:
 				System.out.print("NewName:  ");
@@ -158,6 +169,7 @@ public class Passenger_ind {
 				break;
 			}
 		}
+
 	}
 
 	public static void main(String[] a) throws Exception {

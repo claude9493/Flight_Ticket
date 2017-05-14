@@ -25,7 +25,7 @@ public class City {
 //	Distance: calculate the distance between two cities
 	public double distance(int x1, int y1, int x2, int y2){
 		int n = x1 - x2, m = y1 - y2;
-		return Math.pow(Math.pow((double)n*n, 2)+Math.pow((double)m*m, 2), 0.5);
+		return Math.pow(Math.pow((double)n, 2)+Math.pow((double)m, 2), 0.5);
 	}
 
 }

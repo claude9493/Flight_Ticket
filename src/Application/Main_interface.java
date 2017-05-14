@@ -8,6 +8,7 @@ package Application;
 
 import java.util.Scanner;
 
+import Admin.Admin_individual;
 import Admin.Admins;
 import Flight.Flights;
 import Passenger.passenger;
@@ -17,24 +18,21 @@ public class Main_interface {
 
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
+		passenger p = new passenger();
+		Flights f = new Flights();
+		Admins a = new Admins();
 		try {
-			Admin.Admins.Admins_init();
+			a.read();
+			p.read();
+			f.read();
+			System.out.println("Passengers inilize successfully!\nFlights inilize successfully!\nAdmins inilize successfully!");
 
 		} catch (Exception e) {
 			System.out.println("Sorry, program crashed, please try again.");
 		}
-
-		passenger p = new passenger();
-		Flights f = new Flights();
-		Admins a = new Admins();
-
-		try {
-			p.read();
-			f.read();
-		} catch (Exception e) {
-
-		}
-		System.out.println("Admins inilize successfully!");
+		System.out.println("=============================================");
+//		for(Admin_individual ai:a.List_Admin)
+//			System.out.println(ai.userName);
 		UI.U_I(p,f,a);
 
 	}

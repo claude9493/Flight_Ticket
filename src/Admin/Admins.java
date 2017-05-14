@@ -1,5 +1,8 @@
 package Admin;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.RandomAccessFile;
 /**
  * Admins class [Unfinished]
  * List_Admin存储Admins, 每次启动时，用 Admins_read 从文档中读取Admins的数据，提取到List_Admin里面
@@ -10,48 +13,19 @@ package Admin;
  * 
  */
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.util.Formatter;
-import Admin.Admin_individual.Status_List;
+import java.util.Scanner;
+
+import Flight.Flights;
+import Order.Order;
+import Passenger.Passenger_ind;
+import Passenger.passenger;
 
 public class Admins {
 
-	ArrayList<Admin_individual> List_Admin = new ArrayList<Admin_individual>();
-	int List_Length;
+	public ArrayList<Admin_individual> List_Admin = new ArrayList<Admin_individual>();
 
-	/*
-	 * 
-	 * public void Admin_Log_In() { System.out.print("Name:\t"); Scanner input =
-	 * new Scanner(System.in); String name = input.nextLine(); if
-	 * (contains(List_Admin, name)) { int index = numberof(List_Admin, name);
-	 * System.out.print("Password:\t"); String password = input.nextLine(); if
-	 * (List_Admin[index].password == password) {
-	 * 
-	 * System.out.println("Successfully Log In!"); List_Admin[index].status =
-	 * Status_List.ONLINE;
-	 * 
-	 * } else { System.out.println("Wrong Password!"); }
-	 * 
-	 * } else { System.out.println(
-	 * "Such account does not exist, Please check the name you input or establish a new account. "
-	 * ); } input.close(); }
-	 * 
-	 * // check whether a name is in the list of Admins public boolean
-	 * contains(Admin_individual[] AL, String iname) { for (Admin_individual i :
-	 * AL) { if (i.userName == iname) return false; } return true; }
-	 * 
-	 * // get the index of a name in the list of admins public int
-	 * numberof(Admin_individual[] AL, String iname) { int n = 1; for
-	 * (Admin_individual i : AL) { n++; if (i.userName == iname) { return n; } }
-	 * return 0; }
-	 * 
-	 */
-	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+	
 	// Read Admins information from the list
 	public void read() throws FileNotFoundException {
 		Scanner input80 = new Scanner(new File("Admins.txt"));
@@ -65,10 +39,10 @@ public class Admins {
 	}
 
 	// Create the file that stores the information of Admins
-	public static void Admins_init() throws FileNotFoundException {
+	public void Admins_init() throws FileNotFoundException {
 		Formatter output = new Formatter("Admins.txt");
-		output.format("Zhangyun 123456 OFFLINE\nSunbokai 234567 OFFLINE\nLishiyi 34567 OFFLINE");
-		output.close();
+		output.format("Zhangyun 123456 OFFLINE\nSunbokai 234567 OFFLINE\nLishiyi 34567 OFFLINE\n");
+		read();
 	}
 
 	// check whether some one is in the list
@@ -85,62 +59,129 @@ public class Admins {
 	}
 
 	// Log
-	public void LOG() {
+	public int LOG() {
 		Scanner input81 = new Scanner(System.in);
-		System.out.println("+++++++++++++++++++++++++++++++++++++++");
+//		System.out.println("");
 		System.out.print("Admin name:\t");
 		String name = input81.next();
-		System.out.print("\nPassword:\t");
+		System.out.print("Password:\t");
 		String password = input81.next();
 		if (check(name) != -1) {
 			int index = check(name);
-			if (List_Admin.get(index).get_password().equals(password))
-				System.out.println("Successfully Log In!");
-		} else {
-			System.out.println("Name or Password may be wrong!");
-		}
+			if (List_Admin.get(index).get_password().equals(password)) {
+				System.out.println("Successfully Log In!\n");
+				System.out.println("======================================================");
+				return index;
+			} else {
+				System.out.println("Name or Password may be wrong!");
+				return -1;
+			}
+		} else
+			System.out.println("Such admin doesn't exist.");
+		return -1;
 
 	}
 
 	// Register
 	public void register() throws Exception {
 		Scanner input82 = new Scanner(System.in);
-		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++");
+//		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("======================================================");
 		System.out.print("Name:\t");
 		String name = input82.next();
 		System.out.print("\nPassword:\t");
 		String password = input82.next();
-		if (check(name) != -1)
+		if (check(name) != -1) {
 			System.out.println("Such admin already exists in system.");
+			return;
+		}
 		Admin_individual newAdmin = new Admin_individual(name, password);
 		List_Admin.add(newAdmin);
 		this.write(newAdmin);
+		System.out.println("Successfully add a new Admin.");
 	}
 
 	// super inquire for admins
-	public void inquire() {
+	public void inquire(Flights f, passenger p) {
 		Scanner input83 = new Scanner(System.in);
-		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++");
-		System.out.printf("1.Inquire Flight\n2.Inquire Order\n3.Inquire Passenger");
-		int choose = input83.nextInt();
-		switch (choose) {
-		case 1:
-		case 2:
-		case 3:
+//		System.out.println("======================================================");
+		while (true) {
+			System.out.printf("1.Inquire Flight\n2.Inquire Order\n3.Inquire Passenger\n0.Exit\n");
+			int choose = input83.nextInt();
+			if (choose == 0) {
+				System.out.println();
+				break;
+			}
+			switch (choose) {
+			case 1:
+				f.inquire_p();
+				System.out.println();
+				break;
+			case 2:
+				p.Order_inquire();
+				System.out.println();
+				break;
+			case 3:
+
+				System.out.print("1.List all passengers    2.Inquire by PassengerID\n");
+				int choose2 = input83.nextInt();
+				if (choose2 == 1) {
+					for (Passenger_ind pi : p.PassengerList)
+						System.out.printf("%d %s %s\n", pi.passagerID, pi.identityID, pi.realName);
+					System.out.println();
+				} else if (choose2 == 2) {
+					System.out.print("Enter the passengerID:  ");
+					int ID = input83.nextInt();
+					for (Passenger_ind pi : p.PassengerList)
+						if (pi.passagerID == ID) {
+							System.out.printf("%d  %s  %s\nAll his\\her order:\n", pi.passagerID, pi.identityID,
+									pi.realName);
+							for (Order o : pi.myorder)
+								o.Oprint();
+							System.out.println();
+							break;
+						}
+				} else
+					System.out.println("Invalid input.\n");
+				break;
+			default:
+				System.out.println("Invalid input.\n");
+				break;
+			}
 		}
 	}
 
 	// manage function for admins: manage order and flight and admins list
-	public void manage() {
-		System.out.println();
+	public void manage(Admin_individual ai, Flights f) throws Exception {
+//		System.out.println();
 		Scanner input84 = new Scanner(System.in);
 		while (true) {
-			System.out.printf("MANAGE\n1.AdminsManage2.FlightsManage3.PassengerManage\n0.Exit");
+//			System.out.println("======================================================");
+			System.out.printf(
+					"MANAGE\n1.AdminsManage\t2.FlightsManage\n3.PassengerManage\t0.Exit\n");
 			int choose = input84.nextInt();
+			System.out.println();
 			if (choose == 0)
 				break;
 			switch (choose) {
 			case 1:
+				while (true) {
+					System.out.printf("1.Add a new admin\t2. Modify self information\t0.Exit");
+					int choose2 = input84.nextInt();
+					if (choose2 == 0)
+						break;
+					if (choose2 == 1) {
+						register();
+					} else if (choose2 == 2) {
+						System.out.print("New name:  ");
+						ai.userName = input84.next().trim();
+						System.out.print("New password:  ");
+						ai.set_password(input84.next().trim());
+						rewrite();
+						System.out.println("Succseefully modify self information.");
+					} else
+						System.out.println("Invalid input.");
+				}
 				break;
 			case 2:
 				while (true) {
@@ -148,16 +189,17 @@ public class Admins {
 					int choose2 = input84.nextInt();
 					if (choose2 == 0)
 						break;
-					if(choose2 == 1){
-						
-					}
-					else if(choose2 == 2 ){
-						
-					}
-					else System.out.println("Invalid input.");
+					if (choose2 == 1) {
+						f.modify();
+						f.rewrite();
+						System.out.println();
+					} else if (choose2 == 2) {
+						f.AddFlight();
+						f.rewrite();
+						System.out.println();
+					} else
+						System.out.println("Invalid input.");
 				}
-				break;
-			case 3:
 				break;
 			}
 		}
@@ -169,6 +211,19 @@ public class Admins {
 		RandomAccessFile r = new RandomAccessFile("Admins.txt", "rw");
 		r.seek(r.length());
 		r.writeBytes(String.format("%s\t%s\t%s\r\n", ai.userName, ai.get_password(), ai.status));
+	}
+
+	// Rewrite the whole file after modify informations, by deleting the file
+	// first and then write all information again.
+	public void rewrite() throws Exception {
+//		File file = new File("Admins.txt");
+//		file.delete();
+//		file.createNewFile();
+		RandomAccessFile r = new RandomAccessFile("Admins.txt", "rw");
+//		r.seek(r.length());
+		for (Admin_individual ai : List_Admin) {
+			r.writeBytes(String.format("%s\t%s\t%s\r\n", ai.userName, ai.get_password(), ai.status));
+		}
 	}
 
 	// main function used to test

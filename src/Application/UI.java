@@ -12,14 +12,14 @@ public class UI {
 		Scanner input00 = new Scanner(System.in);
 		while (true) {
 			System.out.println();
-			System.out.print("1.Admin\n2.Passenger\n3.Inquiry\n0.Exit(Input the serial number to choose your role)\n");
+			System.out.print("1.Admin\n2.Passenger\n3.Inquiry\n0.Exit\n");
 			int choose = input00.nextInt();
 			if (choose == 0)// Exit program
 				return;
 
 			switch (choose) {
 			case 1:
-				Admins_UI.Admin();
+				Admins_UI.Admin(f,p);
 				break;
 			case 2:
 				try {

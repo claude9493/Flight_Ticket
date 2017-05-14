@@ -18,9 +18,9 @@ public class Passenger_UI {
 		Scanner input10 = new Scanner(System.in);
 		while (true) {
 			System.out.printf(
-					"1.LOG\n2.REGISTER\n0.EXIT\n(Input the serial number to execute the corresponding operation)\n");
+					"1.LOG\n2.REGISTER\n0.EXIT\n\n");
 			int choose = input10.nextInt();
-			System.out.println();
+//			System.out.println();
 			if (choose == 0)
 				return;
 			switch (choose) {
@@ -28,7 +28,7 @@ public class Passenger_UI {
 				Passenger_ind me = who1.log();
 				if (me.passagerID == -1)
 					break;
-//				System.out.println(me.passagerID + " " + me.identityID);
+				// System.out.println(me.passagerID + " " + me.identityID);
 				System.out.println("=====================================================================");
 				After_Log(me, f, who1);
 				break;
@@ -45,11 +45,12 @@ public class Passenger_UI {
 
 	}
 
-	public static void After_Log(Passenger_ind me, Flights f,passenger who2) throws Exception {
+	public static void After_Log(Passenger_ind me, Flights f, passenger who2) throws Exception {
 		System.out.println();
 		Scanner input11 = new Scanner(System.in);
 		while (true) {
-			System.out.printf("1.Reserve Flight\t2.Inquire\n3.Cancel Flight\t4.My Orders\n5.Edit Profile\t0.Exit\n");
+			System.out.printf(
+					"1.Reserve Flight    2.Inquire\n3.Cancel Order      4.My Orders\n5.Edit Profile      0.Exit\n");
 			int choose2 = input11.nextInt();
 			if (choose2 == 0)
 				return;
@@ -61,24 +62,32 @@ public class Passenger_UI {
 			case 2:
 				f.statuscheck();
 				f.inquire_p();
-//				who2.inquire_p(f);
+				// who2.inquire_p(f);
 				break;
 			case 3:
 				f.statuscheck();
 				me.unsubscribe();
 				break;
 			case 4:
-				System.out.println("All your orders:");
-				for (Order o : me.myorder)
-					if (o.status != StatusList.CANCEL)
-						o.Oprint();
-				System.out.println();
+				System.out.printf("Enter your password first:  ");
+				String epw = input11.next().trim();
+				if (epw.equals(me.get_password())) {
+					System.out.println("All your orders:");
+					for (Order o : me.myorder)
+						if (o.status != StatusList.CANCEL)
+							o.Oprint();
+					System.out.println();
+				}
+				else{
+					System.out.println("Please check your input.\n");
+				}
 				break;
 			case 5:
 				me.set_profile();
-//				who2.re_write();
+				who2.re_write();
+				// who2.re_write();
 				break;
-				
+
 			}
 		}
 	}
