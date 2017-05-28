@@ -26,9 +26,13 @@ public class passenger {
 		System.out.print("\nPassword:\t");
 		new_passenger.set_password(input71.nextLine().trim());
 		new_passenger.passagerID = PassengerList.size();
+		if(check(new_passenger.identityID) == -1){
 		PassengerList.add(new_passenger);
 		write(new_passenger);
-		System.out.println("\nCongratulations, you have successfully registered.");
+		System.out.println("\nCongratulations, you have successfully registered.");}
+		else{
+			System.out.println("Such identityID has been used to register, please check your input.");
+		}
 	}
 
 	// LOG

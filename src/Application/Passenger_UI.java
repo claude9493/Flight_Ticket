@@ -61,7 +61,7 @@ public class Passenger_UI {
 				break;
 			case 2:
 				f.statuscheck();
-				f.inquire_p();
+				f.inquire_p(1);
 				// who2.inquire_p(f);
 				break;
 			case 3:

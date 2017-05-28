@@ -51,18 +51,20 @@ public class Passenger_ind {
 		System.out.print("Reserve flight\nEnter the departure date:  ");
 		Scanner input60 = new Scanner(System.in);
 		String idate = input60.next();
+		//Get the date
 		System.out.println("Enter the FlightID:  ");
 		String ID = input60.next().trim();
 		int index = All_flights.check(ID, idate);
+		//Get the flightID
 		if (index != -1 && All_flights.FlightList.get(index).get_status() == FlightStatus.AVAILABLE) {
 			All_flights.FlightList.get(index).print();
+			//print the flight information
 			System.out.print("\nEnter your password to confirm your role\t");
 			String ans1 = input60.next().trim();
+			//input password
 			if (ans1.equals(this.get_password())) {
 				All_flights.FlightList.get(index).currentPassengers++;
 				Order newOrder = new Order(All_flights.FlightList.get(index), this);
-				// System.out.println(newOrder.passengerID + " " +
-				// newOrder.flight.FlightID);
 				this.myorder.add(newOrder);
 				newOrder.OrderID = this.myorder.size();
 				newOrder.createDate = new Date();
@@ -115,9 +117,15 @@ public class Passenger_ind {
 			else {
 				this.myorder.get(ID - 1).flight.currentPassengers--;
 				this.myorder.get(ID - 1).flight.set_status(FlightStatus.AVAILABLE);
-				this.myorder.get(ID - 1).status = StatusList.CANCEL;
-				System.out.println("You have successfully canceled this order.");
-				System.out.println("Refund is successfully returned.\n");
+				if (this.myorder.get(ID - 1).status.equals(StatusList.UNPAID)) {
+					System.out.println("You have successfully canceled this order.");
+					System.out.println("You have't paid yet, so there is no refund.");
+					this.myorder.get(ID - 1).status = StatusList.CANCEL;
+				} else {
+					System.out.println("You have successfully canceled this order.");
+					System.out.printf("Refund %dyuan is successfully returned.\n", myorder.get(ID-1).flight.price);
+					this.myorder.get(ID - 1).status = StatusList.CANCEL;
+				}
 			}
 		} else
 			System.out.println("Please check your input, such order doesn't exist.\n");
@@ -179,7 +187,7 @@ public class Passenger_ind {
 		Flights F = new Flights();
 		F.read();
 		F.FlightList.get(1).set_status(FlightStatus.AVAILABLE);
-		F.all_flights();
+		F.all_flights(1);
 		test.reserve(F);
 		test.reserve(F);
 		test.unsubscribe();

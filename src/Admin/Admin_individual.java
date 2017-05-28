@@ -23,8 +23,5 @@ public class Admin_individual {
 		this.password = np;
 	}
 	
-	public void createFlight(){
-		
-	}
 	
 }

@@ -25,16 +25,21 @@ public class Main_interface {
 			a.read();
 			p.read();
 			f.read();
-			System.out.println("Passengers inilize successfully!\nFlights inilize successfully!\nAdmins inilize successfully!");
+			// System.out.println("Passengers inilize successfully!\nFlights
+			// inilize successfully!\nAdmins inilize successfully!");
 
 		} catch (Exception e) {
 			System.out.println("Sorry, program crashed, please try again.");
 		}
-		System.out.println("=============================================");
-//		for(Admin_individual ai:a.List_Admin)
-//			System.out.println(ai.userName);
-		UI.U_I(p,f,a);
+//		System.out.println("====================================WELCOME======================================");
+		System.out.println(
+				"------------------------------------------------WELCOME----------------------------------------------\n"
+		      + "| This is a system for flight ticket ordering, you can log as admin or passenger, also you can just |\n"
+			  + "| have a look. Admins can add flights, update flights'information and inquire many information.     |\n"
+			  + "| Passengers can reserve and unsubscrible flight, and inquire some information.                     |\n"
+			  + "------------------------------------------------HAVE FUN--------------------------------------------- ");
+		UI.U_I(p, f, a);
 
 	}
 
-}	
+}

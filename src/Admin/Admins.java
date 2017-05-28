@@ -38,12 +38,6 @@ public class Admins {
 		}
 	}
 
-	// Create the file that stores the information of Admins
-	public void Admins_init() throws FileNotFoundException {
-		Formatter output = new Formatter("Admins.txt");
-		output.format("Zhangyun 123456 OFFLINE\nSunbokai 234567 OFFLINE\nLishiyi 34567 OFFLINE\n");
-		read();
-	}
 
 	// check whether some one is in the list
 	public int check(String name) {
@@ -73,7 +67,7 @@ public class Admins {
 				System.out.println("======================================================");
 				return index;
 			} else {
-				System.out.println("Name or Password may be wrong!");
+				System.out.println("Password may be wrong!");
 				return -1;
 			}
 		} else
@@ -114,7 +108,7 @@ public class Admins {
 			}
 			switch (choose) {
 			case 1:
-				f.inquire_p();
+				f.inquire_p(0);
 				System.out.println();
 				break;
 			case 2:
@@ -160,13 +154,13 @@ public class Admins {
 			System.out.printf(
 					"MANAGE\n1.AdminsManage\t2.FlightsManage\n3.PassengerManage\t0.Exit\n");
 			int choose = input84.nextInt();
-			System.out.println();
+//			System.out.println();
 			if (choose == 0)
 				break;
 			switch (choose) {
 			case 1:
 				while (true) {
-					System.out.printf("1.Add a new admin\t2. Modify self information\t0.Exit");
+					System.out.printf("1.Add a new admin\t2. Modify self information\t0.Exit\n");
 					int choose2 = input84.nextInt();
 					if (choose2 == 0)
 						break;
@@ -195,7 +189,7 @@ public class Admins {
 						System.out.println();
 					} else if (choose2 == 2) {
 						f.AddFlight();
-						f.rewrite();
+//						f.rewrite();
 						System.out.println();
 					} else
 						System.out.println("Invalid input.");
